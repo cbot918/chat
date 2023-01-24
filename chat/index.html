@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  hihihi
+  <!-- <script type="module" src="./lib/util.js"></script> -->
+  <script src="./lib/libws.js"></script>
+
+  <script>
+
+    let g = {}
+    
+    const ws = yws("ws://localhost:4545/ws")
+    ws.on("message", ()=>{})
+    ws.on("close", ()=>{})
+    
+    ws.on("open", (s)=>{
+      s.send('{"ch":"h","msg":"fromclient"}')
+    })
+
+    // g.send('{"ch":"h","msg":"test"}')
+    log(g)
+
+    
+
+
+  </script>
+</body>
+</html>
