@@ -1,10 +1,10 @@
 package main
 
 import (
-	m "chat/middle"
 	u "chat/util"
 	"fmt"
 
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 )
@@ -73,21 +73,16 @@ func main() {
 	// 	ctx.Data(http.StatusOK, "text/html; charset=utf-8", file)
 	// })
 
-	r.Use(m.ServeSpa("/", "./web/dist"))
+	// r.Use(m.ServeSpa("/", "./web/dist"))
 
-	// r.StaticFS("/web", http.Dir("./test/dist"))
-	// r.StaticFS("/chat", http.Dir("./chat"))
-	// r.Use(static.Serve("/web", static.LocalFile("./web/dist", true)))
-
-	// r.GET("/", func(c *gin.Context) {
-	// 	web, err := os.ReadFile("web/index.html")
-	// 	u.Checke(err, "read web failed")
-	// 	fmt.Fprintf(c.Writer, "%s", web)
-	// })
-	// r.GET("/", func(c *gin.Context) {
-	// 	fmt.Fprintf(c.Writer, "%s", "home")
-	// })
+	r.Static("/web", "./web/dist")
+	r.Use(static.Serve("/", static.LocalFile("./web/dist", true)))
 	r.GET("/ws", handleWs)
+	// r.StaticFS("/web", http.Dir("./web/dist"))
+
+	// r.GET("/", func(ctx *gin.Context) {
+	// 	fmt.Fprintf(ctx.Writer, "%s", "home")
+	// })
 
 	fmt.Printf("listen port: %s", port)
 	r.Run(port)

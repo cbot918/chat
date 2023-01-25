@@ -12,4 +12,6 @@ const util = ()=>{
   }
 }
 
+export default util
+
 // target = target.replace("\\", "")
